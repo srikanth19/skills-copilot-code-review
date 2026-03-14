@@ -30,23 +30,27 @@
   --error-light: #ffebee;
   --info: #0c5460;
   --info-light: #d1ecf1;
+  --glass: rgba(255, 255, 255, 0.7);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", "Trebuchet MS", sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", "Trebuchet MS", sans-serif;
   line-height: 1.4;
   color: var(--text-primary);
   max-width: 1200px;
   margin: 0 auto;
   padding: 12px;
-  background-color: var(--background);
+  background:
+    radial-gradient(circle at 0% 0%, #eef6ff 0%, transparent 40%),
+    radial-gradient(circle at 95% 10%, #fff4e6 0%, transparent 35%),
+    var(--background);
   font-size: 0.9rem;
 }
 
@@ -54,14 +58,26 @@ header {
   text-align: center;
   padding: 12px 0;
   margin-bottom: 15px;
-  background-color: var(--primary);
+  background: linear-gradient(120deg, var(--primary-dark), var(--primary));
   color: var(--primary-text);
-  border-radius: 5px;
+  border-radius: 14px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  right: -70px;
+  top: -110px;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 header h1 {
@@ -80,9 +96,10 @@ main {
 }
 
 section {
-  background-color: var(--surface);
+  background-color: var(--glass);
+  backdrop-filter: blur(8px);
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 14px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
 }
@@ -105,7 +122,7 @@ section h3 {
 .sidebar-filters {
   padding: 15px;
   background-color: var(--surface);
-  border-radius: 5px;
+  border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -151,7 +168,7 @@ section h3 {
 .activity-card {
   padding: 12px;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 12px;
   background-color: var(--surface);
   display: flex;
   flex-direction: column;
@@ -239,11 +256,54 @@ section h3 {
 }
 
 .announcement-banner {
-  background-color: #4caf50;
+  background: linear-gradient(120deg, #085078, #85d8ce);
   color: white;
-  text-align: center;
-  padding: 15px;
-  font-weight: bold;
+  padding: 16px 18px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 20px rgba(8, 80, 120, 0.2);
+}
+
+.announcement-banner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.announcement-banner-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+.announcement-icon {
+  font-size: 1.1rem;
+}
+
+.announcement-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.announcement-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.announcement-text {
+  font-weight: 500;
+}
+
+.announcement-date {
+  font-size: 0.75rem;
+  opacity: 0.9;
 }
 
 /* Participants list */
@@ -426,7 +486,7 @@ button {
 .modal-content {
   background-color: var(--surface);
   padding: 18px;
-  border-radius: 5px;
+  border-radius: 12px;
   width: 90%;
   max-width: 350px;
   position: relative;
@@ -441,7 +501,8 @@ button {
 }
 
 .close-modal,
-.close-login-modal {
+.close-login-modal,
+.close-announcement-modal {
   position: absolute;
   right: 12px;
   top: 8px;
@@ -449,6 +510,110 @@ button {
   cursor: pointer;
   color: var(--text-secondary);
   line-height: 1;
+}
+
+.announcement-modal-content {
+  max-width: 760px;
+  width: 95%;
+}
+
+.modal-helper-text {
+  color: var(--text-secondary);
+  margin-top: -6px;
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+}
+
+.announcement-form {
+  background: #f9fbff;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.announcement-form textarea {
+  width: 100%;
+  min-height: 90px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.announcement-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.announcement-form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.secondary-button {
+  background: #eef2f7;
+  color: #1f2937;
+}
+
+.announcement-admin-section {
+  margin-top: 14px;
+}
+
+.announcement-admin-section h4 {
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.announcement-admin-list {
+  list-style: none;
+  max-height: 260px;
+  overflow: auto;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 6px;
+  background: #ffffff;
+}
+
+.announcement-admin-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.announcement-admin-item + .announcement-admin-item {
+  border-top: 1px solid var(--border-light);
+}
+
+.announcement-admin-copy p {
+  margin-bottom: 4px;
+}
+
+.announcement-admin-copy small {
+  color: var(--text-secondary);
+}
+
+.announcement-admin-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.announcement-edit {
+  background: #0b6e4f;
+}
+
+.announcement-delete {
+  background: #b42318;
+}
+
+.announcement-admin-empty {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 14px;
 }
 
 /* Login modal specific styling */
@@ -630,6 +795,7 @@ footer {
 #user-status {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 #user-info {
@@ -647,7 +813,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.18);
   border-radius: 20px;
   padding: 4px 12px;
   font-size: 0.85rem;
@@ -671,4 +837,25 @@ footer {
 
 #logout-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 767px) {
+  .announcement-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #user-controls {
+    position: static;
+    margin-top: 8px;
+  }
+
+  .announcement-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .announcement-admin-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
