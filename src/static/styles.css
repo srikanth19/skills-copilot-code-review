@@ -238,6 +238,14 @@ section h3 {
   background-color: var(--success);
 }
 
+.announcement-banner {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+}
+
 /* Participants list */
 .participants-list {
   margin-top: 8px;
